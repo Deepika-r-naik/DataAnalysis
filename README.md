@@ -5,12 +5,15 @@ This documentation presents an overview of the Power BI project based on the pro
 Visualizations Overview
 Due for Promotion Visualization
 **Due for Promotion**
+Due for Promotion = CALCULATE([Total Employee],'HR Analytics Data'[Due for Promotion]="Yes")
+Not Due for Promotion = CALCULATE([Total Employee],'HR Analytics Data'[Due for Promotion]="No")
 
 Description: Shows the count of employees eligible for promotion based on tenure.
 Purpose: Identifies employees meeting promotion criteria.
 
 **Total Employees Card**
 Total Employees
+Total Employee = COUNTROWS('HR Analytics Data')
 
 Description: Displays the total count of employees in the dataset.
 Purpose: Provides an overview of the workforce size.
@@ -23,6 +26,12 @@ Purpose: Highlights gender diversity in the workforce.
 
 **On Service and Retrench Status Cards**
 Service and Retrench Status
+On Service = If(ISBLANK(CALCULATE([Total Employee], 'HR Analytics Data'[Retreanchment Status]="On Service")),0,CALCULATE([Total Employee], 'HR Analytics Data'[Retreanchment Status]="On Service"))
+On Retreanch = If(ISBLANK(CALCULATE([Total Employee], 'HR Analytics Data'[Retreanchment Status]="Will be Retreanched")),0,CALCULATE([Total Employee], 'HR Analytics Data'[Retreanchment Status]="Will be Retreanched"))
+
+**Percentage****
+% On Service = DIVIDE([On Service],[Total Employee],0)
+% Retreanch = DIVIDE([On Retreanch],[Total Employee],0)
 
 Description: Presents the count of employees on service and those at risk of retrenchment.
 Purpose: Helps in monitoring workforce stability.
